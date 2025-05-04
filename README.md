@@ -27,9 +27,6 @@ username is used for other customer.
 # public page
 - need to show the custom page 
 
-# Supabase password
-zfyvn!ZA29JVQSa5$#%
-
 
 # decisions
 - Defined the database schema and relationships
