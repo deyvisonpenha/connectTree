@@ -1,71 +1,141 @@
-# Roadmap to Building the App
-- first understand the challenge and take a look at the compared app (Linktree)
-- Used Grok to define a good name for the app
-- used GPT to create the copy for the landing page
-- use clerk to authentication and routes control
-- use Supabase and Prisma to handle database
-- Tailwind and shadcn for styles
+# ConnectTree
 
-# Landingpage
+A modern link-in-bio platform inspired by Linktree, built with Next.js, Clerk, and Prisma.
 
-# Onboarding
-- For new users Linktree made a validation in the email input to identify if the user already exist,
-i will change this approach and create a custom onboarding flow using clerk, with that way I don't need to made queries to my BE
-to know if the user exist or not
-- during onboarding, users will define the username, we can validate it when click in continue button and show a message error if the
-username is used for other customer.
-- define a template to use
+## Features
 
-# Dashboard
-- Add edit and delete links
-- changed the background theme
-- Each link when edited need to show options to add: 
-    - icons, Url
-* Nice to have: a preview in mobile
+### Authentication & User Management
+- Secure authentication using Clerk
+- Custom onboarding flow
+- Username validation and uniqueness check
+- User profile management
 
+### Dashboard
+- Create, edit, and delete links
+- Customize profile with:
+  - Profile image (with base64 support)
+  - Title
+  - Bio
+- Link management features:
+  - Custom titles
+  - URLs
+  - Thumbnails
+  - Click tracking
 
-# public page
-- need to show the custom page 
+### Public Profile
+- Responsive design
+- Mobile-friendly layout
+- Click tracking for analytics
 
+## Technical Decisions & Trade-offs
 
-# decisions
-- Defined the database schema and relationships
+### Authentication
+- Chose Clerk over custom auth to:
+  - Reduce development time
+  - Ensure security best practices
+  - Leverage pre-built UI components
+  - Simplify user management
 
+### Database
+- Using Prisma with PostgreSQL for:
+  - Type safety
+  - Easy schema management
+  - Efficient queries
+  - Strong relationships between models
 
+### Image Storage
+- Currently using base64 for images
+  - Trade-off: Increased database size
+  - Future improvement: Implement cloud storage (S3/Cloudinary)
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### UI/UX
+- Shadcn/ui for consistent design
+- Tailwind for rapid styling
 
-## Getting Started
+## Setup Instructions
 
-First, run the development server:
+1. Clone the repository:
+```bash
+git clone [repository-url]
+cd connect-tree
+```
 
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Set up environment variables:
+```env
+# Database
+DATABASE_URL="your-postgresql-url"
+DIRECT_URL="your-direct-postgresql-url"
+
+# Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your-clerk-publishable-key
+CLERK_SECRET_KEY=your-clerk-secret-key
+```
+
+4. Run database migrations:
+```bash
+npx prisma migrate dev
+```
+
+5. Start the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Database Schema
+```prisma
+model User {
+  id            String        @id @map("clerk_id")
+  email         String        @unique
+  imageUrl      String?
+  connectTrees  ConnectTree[]
+}
 
-## Learn More
+model ConnectTree {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  userId    String
+  title     String?
+  bio       String?
+  imageUrl  String?
+  user      User     @relation(fields: [userId], references: [id])
+  links     Link[]
+}
 
-To learn more about Next.js, take a look at the following resources:
+model Link {
+  id            String      @id @default(cuid())
+  title         String
+  url           String
+  thumbnail     String?
+  clicks        Int         @default(0)
+  connectTree   ConnectTree @relation(fields: [connectTreeId], references: [id])
+  connectTreeId String
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Project Structure
+src/
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+├── actions/ # Server actions
 
-## Deploy on Vercel
+├── app/ # Next.js app router
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+├── components/ # React components
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+├── context/ # React context
+
+├── generated/ # Prisma generated types
+
+└── lib/ # Utility functions
