@@ -16,6 +16,7 @@
     "@clerk/nextjs": "^6.18.5",
     "@hookform/resolvers": "^5.0.1",
     "@prisma/client": "^6.7.0",
+    "@prisma/nextjs-monorepo-workaround-plugin": "^6.7.0",
     "@radix-ui/primitive": "^1.1.2",
     "@radix-ui/react-avatar": "^1.1.8",
     "@radix-ui/react-compose-refs": "^1.1.2",

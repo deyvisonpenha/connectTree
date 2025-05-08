@@ -1,13 +1,11 @@
 import type { NextConfig } from "next";
+//@ts-ignore
+import { PrismaPlugin } from '@prisma/nextjs-monorepo-workaround-plugin';
 
 const nextConfig: NextConfig = {
   webpack: (config, { isServer }) => {
     if (isServer) {
-      config.externals = [
-        ...(config.externals || []),
-        "@prisma/client",
-        "prisma",
-      ]
+      config.plugins = [...config.plugins, new PrismaPlugin()]
     }
     return config
   },
