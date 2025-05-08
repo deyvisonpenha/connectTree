@@ -166,6 +166,10 @@ const config = {
         "fromEnvVar": null,
         "value": "darwin-arm64",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -183,16 +187,17 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres.lpyqwdkrztriwtdghfpw:EYxZrpZvgra1Xiyf@aws-0-us-east-2.pooler.supabase.com:6543/postgres?pgbouncer=true"
+        "value": null
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel User {\n  id           String        @id @map(\"clerk_id\") // Clerk user ID\n  email        String        @unique\n  imageUrl     String?\n  createdAt    DateTime      @default(now())\n  updatedAt    DateTime      @updatedAt\n  connectTrees ConnectTree[]\n\n  @@map(\"users\")\n}\n\nmodel ConnectTree {\n  id        String   @id @default(cuid())\n  username  String   @unique\n  userId    String\n  title     String?\n  bio       String?\n  avatar    String?\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n  links     Link[] // Each connecttree can have many links\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"connecttrees\")\n}\n\nmodel Link {\n  id        String   @id @default(cuid())\n  title     String\n  url       String\n  thumbnail String?\n  clicks    Int      @default(0)\n  visible   Boolean  @default(true)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relation to User\n  connectTreeId String\n  connectTree   ConnectTree @relation(fields: [connectTreeId], references: [id], onDelete: Cascade)\n\n  @@map(\"links\")\n}\n",
-  "inlineSchemaHash": "44ba665797128b1d6d507b6c6192e1a72188095333cb4b4cd97768375634e8bb",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n  output        = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel User {\n  id           String        @id @map(\"clerk_id\") // Clerk user ID\n  email        String        @unique\n  imageUrl     String?\n  createdAt    DateTime      @default(now())\n  updatedAt    DateTime      @updatedAt\n  connectTrees ConnectTree[]\n\n  @@map(\"users\")\n}\n\nmodel ConnectTree {\n  id        String   @id @default(cuid())\n  username  String   @unique\n  userId    String\n  title     String?\n  bio       String?\n  avatar    String?\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n  links     Link[] // Each connecttree can have many links\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"connecttrees\")\n}\n\nmodel Link {\n  id        String   @id @default(cuid())\n  title     String\n  url       String\n  thumbnail String?\n  clicks    Int      @default(0)\n  visible   Boolean  @default(true)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relation to User\n  connectTreeId String\n  connectTree   ConnectTree @relation(fields: [connectTreeId], references: [id], onDelete: Cascade)\n\n  @@map(\"links\")\n}\n",
+  "inlineSchemaHash": "5ced3068dcb4c8021fc2a35e79c83d234204b764f1658905c9a9d1fd6a9f522e",
   "copyEngine": true
 }
 config.dirname = '/'
