@@ -5,10 +5,11 @@ import { notFound } from "next/navigation";
 export default async function Page({
   params,
 }: {
-  params: { username: string };
+  params: Promise<{ username: string }>;
 }) {
+  const { username } = await params;
   try {
-    const connectTree = await getConnectTreeByUsername(params.username);
+    const connectTree = await getConnectTreeByUsername(username);
 
     return <PreviewConnectTree connectTree={connectTree} />;
   } catch (error) {
