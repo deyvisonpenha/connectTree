@@ -123,8 +123,18 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  username: 'username',
   imageUrl: 'imageUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ConnectTreeScalarFieldEnum = {
+  id: 'id',
+  username: 'username',
+  userId: 'userId',
+  title: 'title',
+  bio: 'bio',
+  avatar: 'avatar',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -138,7 +148,7 @@ exports.Prisma.LinkScalarFieldEnum = {
   visible: 'visible',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  connectTreeId: 'connectTreeId'
 };
 
 exports.Prisma.SortOrder = {
@@ -159,6 +169,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  ConnectTree: 'ConnectTree',
   Link: 'Link'
 };
 

@@ -1,8 +1,17 @@
+import { getConnectTreeByUsername } from "@/actions";
+import PreviewConnectTree from "@/components/previewConnectTree";
+import { notFound } from "next/navigation";
+
 export default async function Page({
   params,
 }: {
-  params: Promise<{ username: string }>;
+  params: { username: string };
 }) {
-  const { username } = await params;
-  return <div>My Post: {username}</div>;
+  try {
+    const connectTree = await getConnectTreeByUsername(params.username);
+
+    return <PreviewConnectTree connectTree={connectTree} />;
+  } catch (error) {
+    notFound();
+  }
 }

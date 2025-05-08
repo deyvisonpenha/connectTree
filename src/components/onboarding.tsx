@@ -4,7 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
-import { createAccount } from "@/actions/createAccount";
+import {
+  createAccount,
+  verifyUsernameAvailability,
+  createConnectTree,
+  updateOnboardingStatus,
+} from "@/actions";
 import {
   InputBase,
   InputBaseAdornment,
@@ -41,20 +46,28 @@ export default function Onboarding() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    startTransition(() => {
+    startTransition(async () => {
       const username = values.username;
-      createAccount(username)
-        .then((response) => {
-          console.log(response);
-          if (response.onboardingComplete) {
-            toast("Account has been created!");
-          } else {
-            const messageError = response.error as string;
-            form.setError("username", {
-              type: "manual",
-              message: messageError,
-            });
-          }
+
+      const hasUsername = await verifyUsernameAvailability(username);
+
+      if (hasUsername) {
+        const messageError = "This ConnectTree username already taken";
+        form.setError("username", {
+          type: "manual",
+          message: messageError,
+        });
+        return;
+      }
+
+      createAccount()
+        .then(({ user }) => {
+          createConnectTree(username, user.id).then(() =>
+            updateOnboardingStatus()
+          );
+        })
+        .catch((error: string) => {
+          toast.error(error);
         })
         .finally(() => {
           router.push("/dashboard");

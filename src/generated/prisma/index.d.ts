@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model ConnectTree
+ * 
+ */
+export type ConnectTree = $Result.DefaultSelection<Prisma.$ConnectTreePayload>
+/**
  * Model Link
  * 
  */
@@ -158,6 +163,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.connectTree`: Exposes CRUD operations for the **ConnectTree** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ConnectTrees
+    * const connectTrees = await prisma.connectTree.findMany()
+    * ```
+    */
+  get connectTree(): Prisma.ConnectTreeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.link`: Exposes CRUD operations for the **Link** model.
@@ -609,6 +624,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    ConnectTree: 'ConnectTree',
     Link: 'Link'
   };
 
@@ -628,7 +644,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "link"
+      modelProps: "user" | "connectTree" | "link"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -703,6 +719,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      ConnectTree: {
+        payload: Prisma.$ConnectTreePayload<ExtArgs>
+        fields: Prisma.ConnectTreeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ConnectTreeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConnectTreePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ConnectTreeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConnectTreePayload>
+          }
+          findFirst: {
+            args: Prisma.ConnectTreeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConnectTreePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ConnectTreeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConnectTreePayload>
+          }
+          findMany: {
+            args: Prisma.ConnectTreeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConnectTreePayload>[]
+          }
+          create: {
+            args: Prisma.ConnectTreeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConnectTreePayload>
+          }
+          createMany: {
+            args: Prisma.ConnectTreeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ConnectTreeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConnectTreePayload>[]
+          }
+          delete: {
+            args: Prisma.ConnectTreeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConnectTreePayload>
+          }
+          update: {
+            args: Prisma.ConnectTreeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConnectTreePayload>
+          }
+          deleteMany: {
+            args: Prisma.ConnectTreeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ConnectTreeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ConnectTreeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConnectTreePayload>[]
+          }
+          upsert: {
+            args: Prisma.ConnectTreeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConnectTreePayload>
+          }
+          aggregate: {
+            args: Prisma.ConnectTreeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConnectTree>
+          }
+          groupBy: {
+            args: Prisma.ConnectTreeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConnectTreeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ConnectTreeCountArgs<ExtArgs>
+            result: $Utils.Optional<ConnectTreeCountAggregateOutputType> | number
           }
         }
       }
@@ -865,6 +955,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    connectTree?: ConnectTreeOmit
     link?: LinkOmit
   }
 
@@ -960,11 +1051,11 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    links: number
+    connectTrees: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    links?: boolean | UserCountOutputTypeCountLinksArgs
+    connectTrees?: boolean | UserCountOutputTypeCountConnectTreesArgs
   }
 
   // Custom InputTypes
@@ -981,7 +1072,38 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountConnectTreesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConnectTreeWhereInput
+  }
+
+
+  /**
+   * Count Type ConnectTreeCountOutputType
+   */
+
+  export type ConnectTreeCountOutputType = {
+    links: number
+  }
+
+  export type ConnectTreeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    links?: boolean | ConnectTreeCountOutputTypeCountLinksArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ConnectTreeCountOutputType without action
+   */
+  export type ConnectTreeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConnectTreeCountOutputType
+     */
+    select?: ConnectTreeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ConnectTreeCountOutputType without action
+   */
+  export type ConnectTreeCountOutputTypeCountLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LinkWhereInput
   }
 
@@ -1003,7 +1125,6 @@ export namespace Prisma {
   export type UserMinAggregateOutputType = {
     id: string | null
     email: string | null
-    username: string | null
     imageUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1012,7 +1133,6 @@ export namespace Prisma {
   export type UserMaxAggregateOutputType = {
     id: string | null
     email: string | null
-    username: string | null
     imageUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1021,7 +1141,6 @@ export namespace Prisma {
   export type UserCountAggregateOutputType = {
     id: number
     email: number
-    username: number
     imageUrl: number
     createdAt: number
     updatedAt: number
@@ -1032,7 +1151,6 @@ export namespace Prisma {
   export type UserMinAggregateInputType = {
     id?: true
     email?: true
-    username?: true
     imageUrl?: true
     createdAt?: true
     updatedAt?: true
@@ -1041,7 +1159,6 @@ export namespace Prisma {
   export type UserMaxAggregateInputType = {
     id?: true
     email?: true
-    username?: true
     imageUrl?: true
     createdAt?: true
     updatedAt?: true
@@ -1050,7 +1167,6 @@ export namespace Prisma {
   export type UserCountAggregateInputType = {
     id?: true
     email?: true
-    username?: true
     imageUrl?: true
     createdAt?: true
     updatedAt?: true
@@ -1132,7 +1248,6 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: string
     email: string
-    username: string
     imageUrl: string | null
     createdAt: Date
     updatedAt: Date
@@ -1158,18 +1273,16 @@ export namespace Prisma {
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    username?: boolean
     imageUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    links?: boolean | User$linksArgs<ExtArgs>
+    connectTrees?: boolean | User$connectTreesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    username?: boolean
     imageUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -1178,7 +1291,6 @@ export namespace Prisma {
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    username?: boolean
     imageUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -1187,15 +1299,14 @@ export namespace Prisma {
   export type UserSelectScalar = {
     id?: boolean
     email?: boolean
-    username?: boolean
     imageUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "username" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    links?: boolean | User$linksArgs<ExtArgs>
+    connectTrees?: boolean | User$connectTreesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1204,12 +1315,11 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      links: Prisma.$LinkPayload<ExtArgs>[]
+      connectTrees: Prisma.$ConnectTreePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
-      username: string
       imageUrl: string | null
       createdAt: Date
       updatedAt: Date
@@ -1607,7 +1717,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    links<T extends User$linksArgs<ExtArgs> = {}>(args?: Subset<T, User$linksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    connectTrees<T extends User$connectTreesArgs<ExtArgs> = {}>(args?: Subset<T, User$connectTreesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConnectTreePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1639,7 +1749,6 @@ export namespace Prisma {
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
-    readonly username: FieldRef<"User", 'String'>
     readonly imageUrl: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
@@ -2031,9 +2140,1136 @@ export namespace Prisma {
   }
 
   /**
-   * User.links
+   * User.connectTrees
    */
-  export type User$linksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$connectTreesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConnectTree
+     */
+    select?: ConnectTreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConnectTree
+     */
+    omit?: ConnectTreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConnectTreeInclude<ExtArgs> | null
+    where?: ConnectTreeWhereInput
+    orderBy?: ConnectTreeOrderByWithRelationInput | ConnectTreeOrderByWithRelationInput[]
+    cursor?: ConnectTreeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConnectTreeScalarFieldEnum | ConnectTreeScalarFieldEnum[]
+  }
+
+  /**
+   * User without action
+   */
+  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ConnectTree
+   */
+
+  export type AggregateConnectTree = {
+    _count: ConnectTreeCountAggregateOutputType | null
+    _min: ConnectTreeMinAggregateOutputType | null
+    _max: ConnectTreeMaxAggregateOutputType | null
+  }
+
+  export type ConnectTreeMinAggregateOutputType = {
+    id: string | null
+    username: string | null
+    userId: string | null
+    title: string | null
+    bio: string | null
+    avatar: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ConnectTreeMaxAggregateOutputType = {
+    id: string | null
+    username: string | null
+    userId: string | null
+    title: string | null
+    bio: string | null
+    avatar: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ConnectTreeCountAggregateOutputType = {
+    id: number
+    username: number
+    userId: number
+    title: number
+    bio: number
+    avatar: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ConnectTreeMinAggregateInputType = {
+    id?: true
+    username?: true
+    userId?: true
+    title?: true
+    bio?: true
+    avatar?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ConnectTreeMaxAggregateInputType = {
+    id?: true
+    username?: true
+    userId?: true
+    title?: true
+    bio?: true
+    avatar?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ConnectTreeCountAggregateInputType = {
+    id?: true
+    username?: true
+    userId?: true
+    title?: true
+    bio?: true
+    avatar?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ConnectTreeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConnectTree to aggregate.
+     */
+    where?: ConnectTreeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConnectTrees to fetch.
+     */
+    orderBy?: ConnectTreeOrderByWithRelationInput | ConnectTreeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ConnectTreeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConnectTrees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConnectTrees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ConnectTrees
+    **/
+    _count?: true | ConnectTreeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConnectTreeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConnectTreeMaxAggregateInputType
+  }
+
+  export type GetConnectTreeAggregateType<T extends ConnectTreeAggregateArgs> = {
+        [P in keyof T & keyof AggregateConnectTree]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConnectTree[P]>
+      : GetScalarType<T[P], AggregateConnectTree[P]>
+  }
+
+
+
+
+  export type ConnectTreeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConnectTreeWhereInput
+    orderBy?: ConnectTreeOrderByWithAggregationInput | ConnectTreeOrderByWithAggregationInput[]
+    by: ConnectTreeScalarFieldEnum[] | ConnectTreeScalarFieldEnum
+    having?: ConnectTreeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConnectTreeCountAggregateInputType | true
+    _min?: ConnectTreeMinAggregateInputType
+    _max?: ConnectTreeMaxAggregateInputType
+  }
+
+  export type ConnectTreeGroupByOutputType = {
+    id: string
+    username: string
+    userId: string
+    title: string | null
+    bio: string | null
+    avatar: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ConnectTreeCountAggregateOutputType | null
+    _min: ConnectTreeMinAggregateOutputType | null
+    _max: ConnectTreeMaxAggregateOutputType | null
+  }
+
+  type GetConnectTreeGroupByPayload<T extends ConnectTreeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConnectTreeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConnectTreeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConnectTreeGroupByOutputType[P]>
+            : GetScalarType<T[P], ConnectTreeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ConnectTreeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    username?: boolean
+    userId?: boolean
+    title?: boolean
+    bio?: boolean
+    avatar?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    links?: boolean | ConnectTree$linksArgs<ExtArgs>
+    _count?: boolean | ConnectTreeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["connectTree"]>
+
+  export type ConnectTreeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    username?: boolean
+    userId?: boolean
+    title?: boolean
+    bio?: boolean
+    avatar?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["connectTree"]>
+
+  export type ConnectTreeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    username?: boolean
+    userId?: boolean
+    title?: boolean
+    bio?: boolean
+    avatar?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["connectTree"]>
+
+  export type ConnectTreeSelectScalar = {
+    id?: boolean
+    username?: boolean
+    userId?: boolean
+    title?: boolean
+    bio?: boolean
+    avatar?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ConnectTreeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "userId" | "title" | "bio" | "avatar" | "createdAt" | "updatedAt", ExtArgs["result"]["connectTree"]>
+  export type ConnectTreeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    links?: boolean | ConnectTree$linksArgs<ExtArgs>
+    _count?: boolean | ConnectTreeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ConnectTreeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ConnectTreeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ConnectTreePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ConnectTree"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      links: Prisma.$LinkPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      username: string
+      userId: string
+      title: string | null
+      bio: string | null
+      avatar: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["connectTree"]>
+    composites: {}
+  }
+
+  type ConnectTreeGetPayload<S extends boolean | null | undefined | ConnectTreeDefaultArgs> = $Result.GetResult<Prisma.$ConnectTreePayload, S>
+
+  type ConnectTreeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ConnectTreeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConnectTreeCountAggregateInputType | true
+    }
+
+  export interface ConnectTreeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ConnectTree'], meta: { name: 'ConnectTree' } }
+    /**
+     * Find zero or one ConnectTree that matches the filter.
+     * @param {ConnectTreeFindUniqueArgs} args - Arguments to find a ConnectTree
+     * @example
+     * // Get one ConnectTree
+     * const connectTree = await prisma.connectTree.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ConnectTreeFindUniqueArgs>(args: SelectSubset<T, ConnectTreeFindUniqueArgs<ExtArgs>>): Prisma__ConnectTreeClient<$Result.GetResult<Prisma.$ConnectTreePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ConnectTree that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ConnectTreeFindUniqueOrThrowArgs} args - Arguments to find a ConnectTree
+     * @example
+     * // Get one ConnectTree
+     * const connectTree = await prisma.connectTree.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ConnectTreeFindUniqueOrThrowArgs>(args: SelectSubset<T, ConnectTreeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConnectTreeClient<$Result.GetResult<Prisma.$ConnectTreePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConnectTree that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConnectTreeFindFirstArgs} args - Arguments to find a ConnectTree
+     * @example
+     * // Get one ConnectTree
+     * const connectTree = await prisma.connectTree.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ConnectTreeFindFirstArgs>(args?: SelectSubset<T, ConnectTreeFindFirstArgs<ExtArgs>>): Prisma__ConnectTreeClient<$Result.GetResult<Prisma.$ConnectTreePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConnectTree that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConnectTreeFindFirstOrThrowArgs} args - Arguments to find a ConnectTree
+     * @example
+     * // Get one ConnectTree
+     * const connectTree = await prisma.connectTree.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ConnectTreeFindFirstOrThrowArgs>(args?: SelectSubset<T, ConnectTreeFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConnectTreeClient<$Result.GetResult<Prisma.$ConnectTreePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ConnectTrees that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConnectTreeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ConnectTrees
+     * const connectTrees = await prisma.connectTree.findMany()
+     * 
+     * // Get first 10 ConnectTrees
+     * const connectTrees = await prisma.connectTree.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const connectTreeWithIdOnly = await prisma.connectTree.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ConnectTreeFindManyArgs>(args?: SelectSubset<T, ConnectTreeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConnectTreePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ConnectTree.
+     * @param {ConnectTreeCreateArgs} args - Arguments to create a ConnectTree.
+     * @example
+     * // Create one ConnectTree
+     * const ConnectTree = await prisma.connectTree.create({
+     *   data: {
+     *     // ... data to create a ConnectTree
+     *   }
+     * })
+     * 
+     */
+    create<T extends ConnectTreeCreateArgs>(args: SelectSubset<T, ConnectTreeCreateArgs<ExtArgs>>): Prisma__ConnectTreeClient<$Result.GetResult<Prisma.$ConnectTreePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ConnectTrees.
+     * @param {ConnectTreeCreateManyArgs} args - Arguments to create many ConnectTrees.
+     * @example
+     * // Create many ConnectTrees
+     * const connectTree = await prisma.connectTree.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ConnectTreeCreateManyArgs>(args?: SelectSubset<T, ConnectTreeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ConnectTrees and returns the data saved in the database.
+     * @param {ConnectTreeCreateManyAndReturnArgs} args - Arguments to create many ConnectTrees.
+     * @example
+     * // Create many ConnectTrees
+     * const connectTree = await prisma.connectTree.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ConnectTrees and only return the `id`
+     * const connectTreeWithIdOnly = await prisma.connectTree.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ConnectTreeCreateManyAndReturnArgs>(args?: SelectSubset<T, ConnectTreeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConnectTreePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ConnectTree.
+     * @param {ConnectTreeDeleteArgs} args - Arguments to delete one ConnectTree.
+     * @example
+     * // Delete one ConnectTree
+     * const ConnectTree = await prisma.connectTree.delete({
+     *   where: {
+     *     // ... filter to delete one ConnectTree
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ConnectTreeDeleteArgs>(args: SelectSubset<T, ConnectTreeDeleteArgs<ExtArgs>>): Prisma__ConnectTreeClient<$Result.GetResult<Prisma.$ConnectTreePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ConnectTree.
+     * @param {ConnectTreeUpdateArgs} args - Arguments to update one ConnectTree.
+     * @example
+     * // Update one ConnectTree
+     * const connectTree = await prisma.connectTree.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ConnectTreeUpdateArgs>(args: SelectSubset<T, ConnectTreeUpdateArgs<ExtArgs>>): Prisma__ConnectTreeClient<$Result.GetResult<Prisma.$ConnectTreePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ConnectTrees.
+     * @param {ConnectTreeDeleteManyArgs} args - Arguments to filter ConnectTrees to delete.
+     * @example
+     * // Delete a few ConnectTrees
+     * const { count } = await prisma.connectTree.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ConnectTreeDeleteManyArgs>(args?: SelectSubset<T, ConnectTreeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConnectTrees.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConnectTreeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ConnectTrees
+     * const connectTree = await prisma.connectTree.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ConnectTreeUpdateManyArgs>(args: SelectSubset<T, ConnectTreeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConnectTrees and returns the data updated in the database.
+     * @param {ConnectTreeUpdateManyAndReturnArgs} args - Arguments to update many ConnectTrees.
+     * @example
+     * // Update many ConnectTrees
+     * const connectTree = await prisma.connectTree.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ConnectTrees and only return the `id`
+     * const connectTreeWithIdOnly = await prisma.connectTree.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ConnectTreeUpdateManyAndReturnArgs>(args: SelectSubset<T, ConnectTreeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConnectTreePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ConnectTree.
+     * @param {ConnectTreeUpsertArgs} args - Arguments to update or create a ConnectTree.
+     * @example
+     * // Update or create a ConnectTree
+     * const connectTree = await prisma.connectTree.upsert({
+     *   create: {
+     *     // ... data to create a ConnectTree
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ConnectTree we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ConnectTreeUpsertArgs>(args: SelectSubset<T, ConnectTreeUpsertArgs<ExtArgs>>): Prisma__ConnectTreeClient<$Result.GetResult<Prisma.$ConnectTreePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ConnectTrees.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConnectTreeCountArgs} args - Arguments to filter ConnectTrees to count.
+     * @example
+     * // Count the number of ConnectTrees
+     * const count = await prisma.connectTree.count({
+     *   where: {
+     *     // ... the filter for the ConnectTrees we want to count
+     *   }
+     * })
+    **/
+    count<T extends ConnectTreeCountArgs>(
+      args?: Subset<T, ConnectTreeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConnectTreeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ConnectTree.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConnectTreeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConnectTreeAggregateArgs>(args: Subset<T, ConnectTreeAggregateArgs>): Prisma.PrismaPromise<GetConnectTreeAggregateType<T>>
+
+    /**
+     * Group by ConnectTree.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConnectTreeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ConnectTreeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ConnectTreeGroupByArgs['orderBy'] }
+        : { orderBy?: ConnectTreeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ConnectTreeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConnectTreeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ConnectTree model
+   */
+  readonly fields: ConnectTreeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ConnectTree.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ConnectTreeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    links<T extends ConnectTree$linksArgs<ExtArgs> = {}>(args?: Subset<T, ConnectTree$linksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ConnectTree model
+   */
+  interface ConnectTreeFieldRefs {
+    readonly id: FieldRef<"ConnectTree", 'String'>
+    readonly username: FieldRef<"ConnectTree", 'String'>
+    readonly userId: FieldRef<"ConnectTree", 'String'>
+    readonly title: FieldRef<"ConnectTree", 'String'>
+    readonly bio: FieldRef<"ConnectTree", 'String'>
+    readonly avatar: FieldRef<"ConnectTree", 'String'>
+    readonly createdAt: FieldRef<"ConnectTree", 'DateTime'>
+    readonly updatedAt: FieldRef<"ConnectTree", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ConnectTree findUnique
+   */
+  export type ConnectTreeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConnectTree
+     */
+    select?: ConnectTreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConnectTree
+     */
+    omit?: ConnectTreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConnectTreeInclude<ExtArgs> | null
+    /**
+     * Filter, which ConnectTree to fetch.
+     */
+    where: ConnectTreeWhereUniqueInput
+  }
+
+  /**
+   * ConnectTree findUniqueOrThrow
+   */
+  export type ConnectTreeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConnectTree
+     */
+    select?: ConnectTreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConnectTree
+     */
+    omit?: ConnectTreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConnectTreeInclude<ExtArgs> | null
+    /**
+     * Filter, which ConnectTree to fetch.
+     */
+    where: ConnectTreeWhereUniqueInput
+  }
+
+  /**
+   * ConnectTree findFirst
+   */
+  export type ConnectTreeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConnectTree
+     */
+    select?: ConnectTreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConnectTree
+     */
+    omit?: ConnectTreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConnectTreeInclude<ExtArgs> | null
+    /**
+     * Filter, which ConnectTree to fetch.
+     */
+    where?: ConnectTreeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConnectTrees to fetch.
+     */
+    orderBy?: ConnectTreeOrderByWithRelationInput | ConnectTreeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConnectTrees.
+     */
+    cursor?: ConnectTreeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConnectTrees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConnectTrees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConnectTrees.
+     */
+    distinct?: ConnectTreeScalarFieldEnum | ConnectTreeScalarFieldEnum[]
+  }
+
+  /**
+   * ConnectTree findFirstOrThrow
+   */
+  export type ConnectTreeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConnectTree
+     */
+    select?: ConnectTreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConnectTree
+     */
+    omit?: ConnectTreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConnectTreeInclude<ExtArgs> | null
+    /**
+     * Filter, which ConnectTree to fetch.
+     */
+    where?: ConnectTreeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConnectTrees to fetch.
+     */
+    orderBy?: ConnectTreeOrderByWithRelationInput | ConnectTreeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConnectTrees.
+     */
+    cursor?: ConnectTreeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConnectTrees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConnectTrees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConnectTrees.
+     */
+    distinct?: ConnectTreeScalarFieldEnum | ConnectTreeScalarFieldEnum[]
+  }
+
+  /**
+   * ConnectTree findMany
+   */
+  export type ConnectTreeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConnectTree
+     */
+    select?: ConnectTreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConnectTree
+     */
+    omit?: ConnectTreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConnectTreeInclude<ExtArgs> | null
+    /**
+     * Filter, which ConnectTrees to fetch.
+     */
+    where?: ConnectTreeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConnectTrees to fetch.
+     */
+    orderBy?: ConnectTreeOrderByWithRelationInput | ConnectTreeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ConnectTrees.
+     */
+    cursor?: ConnectTreeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConnectTrees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConnectTrees.
+     */
+    skip?: number
+    distinct?: ConnectTreeScalarFieldEnum | ConnectTreeScalarFieldEnum[]
+  }
+
+  /**
+   * ConnectTree create
+   */
+  export type ConnectTreeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConnectTree
+     */
+    select?: ConnectTreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConnectTree
+     */
+    omit?: ConnectTreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConnectTreeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ConnectTree.
+     */
+    data: XOR<ConnectTreeCreateInput, ConnectTreeUncheckedCreateInput>
+  }
+
+  /**
+   * ConnectTree createMany
+   */
+  export type ConnectTreeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ConnectTrees.
+     */
+    data: ConnectTreeCreateManyInput | ConnectTreeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ConnectTree createManyAndReturn
+   */
+  export type ConnectTreeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConnectTree
+     */
+    select?: ConnectTreeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConnectTree
+     */
+    omit?: ConnectTreeOmit<ExtArgs> | null
+    /**
+     * The data used to create many ConnectTrees.
+     */
+    data: ConnectTreeCreateManyInput | ConnectTreeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConnectTreeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConnectTree update
+   */
+  export type ConnectTreeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConnectTree
+     */
+    select?: ConnectTreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConnectTree
+     */
+    omit?: ConnectTreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConnectTreeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ConnectTree.
+     */
+    data: XOR<ConnectTreeUpdateInput, ConnectTreeUncheckedUpdateInput>
+    /**
+     * Choose, which ConnectTree to update.
+     */
+    where: ConnectTreeWhereUniqueInput
+  }
+
+  /**
+   * ConnectTree updateMany
+   */
+  export type ConnectTreeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ConnectTrees.
+     */
+    data: XOR<ConnectTreeUpdateManyMutationInput, ConnectTreeUncheckedUpdateManyInput>
+    /**
+     * Filter which ConnectTrees to update
+     */
+    where?: ConnectTreeWhereInput
+    /**
+     * Limit how many ConnectTrees to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConnectTree updateManyAndReturn
+   */
+  export type ConnectTreeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConnectTree
+     */
+    select?: ConnectTreeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConnectTree
+     */
+    omit?: ConnectTreeOmit<ExtArgs> | null
+    /**
+     * The data used to update ConnectTrees.
+     */
+    data: XOR<ConnectTreeUpdateManyMutationInput, ConnectTreeUncheckedUpdateManyInput>
+    /**
+     * Filter which ConnectTrees to update
+     */
+    where?: ConnectTreeWhereInput
+    /**
+     * Limit how many ConnectTrees to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConnectTreeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConnectTree upsert
+   */
+  export type ConnectTreeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConnectTree
+     */
+    select?: ConnectTreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConnectTree
+     */
+    omit?: ConnectTreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConnectTreeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ConnectTree to update in case it exists.
+     */
+    where: ConnectTreeWhereUniqueInput
+    /**
+     * In case the ConnectTree found by the `where` argument doesn't exist, create a new ConnectTree with this data.
+     */
+    create: XOR<ConnectTreeCreateInput, ConnectTreeUncheckedCreateInput>
+    /**
+     * In case the ConnectTree was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ConnectTreeUpdateInput, ConnectTreeUncheckedUpdateInput>
+  }
+
+  /**
+   * ConnectTree delete
+   */
+  export type ConnectTreeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConnectTree
+     */
+    select?: ConnectTreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConnectTree
+     */
+    omit?: ConnectTreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConnectTreeInclude<ExtArgs> | null
+    /**
+     * Filter which ConnectTree to delete.
+     */
+    where: ConnectTreeWhereUniqueInput
+  }
+
+  /**
+   * ConnectTree deleteMany
+   */
+  export type ConnectTreeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConnectTrees to delete
+     */
+    where?: ConnectTreeWhereInput
+    /**
+     * Limit how many ConnectTrees to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConnectTree.links
+   */
+  export type ConnectTree$linksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Link
      */
@@ -2055,21 +3291,21 @@ export namespace Prisma {
   }
 
   /**
-   * User without action
+   * ConnectTree without action
    */
-  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConnectTreeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the ConnectTree
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: ConnectTreeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the ConnectTree
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: ConnectTreeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: ConnectTreeInclude<ExtArgs> | null
   }
 
 
@@ -2102,7 +3338,7 @@ export namespace Prisma {
     visible: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
-    userId: string | null
+    connectTreeId: string | null
   }
 
   export type LinkMaxAggregateOutputType = {
@@ -2114,7 +3350,7 @@ export namespace Prisma {
     visible: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
-    userId: string | null
+    connectTreeId: string | null
   }
 
   export type LinkCountAggregateOutputType = {
@@ -2126,7 +3362,7 @@ export namespace Prisma {
     visible: number
     createdAt: number
     updatedAt: number
-    userId: number
+    connectTreeId: number
     _all: number
   }
 
@@ -2148,7 +3384,7 @@ export namespace Prisma {
     visible?: true
     createdAt?: true
     updatedAt?: true
-    userId?: true
+    connectTreeId?: true
   }
 
   export type LinkMaxAggregateInputType = {
@@ -2160,7 +3396,7 @@ export namespace Prisma {
     visible?: true
     createdAt?: true
     updatedAt?: true
-    userId?: true
+    connectTreeId?: true
   }
 
   export type LinkCountAggregateInputType = {
@@ -2172,7 +3408,7 @@ export namespace Prisma {
     visible?: true
     createdAt?: true
     updatedAt?: true
-    userId?: true
+    connectTreeId?: true
     _all?: true
   }
 
@@ -2271,7 +3507,7 @@ export namespace Prisma {
     visible: boolean
     createdAt: Date
     updatedAt: Date
-    userId: string
+    connectTreeId: string
     _count: LinkCountAggregateOutputType | null
     _avg: LinkAvgAggregateOutputType | null
     _sum: LinkSumAggregateOutputType | null
@@ -2302,8 +3538,8 @@ export namespace Prisma {
     visible?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    connectTreeId?: boolean
+    connectTree?: boolean | ConnectTreeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["link"]>
 
   export type LinkSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2315,8 +3551,8 @@ export namespace Prisma {
     visible?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    connectTreeId?: boolean
+    connectTree?: boolean | ConnectTreeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["link"]>
 
   export type LinkSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2328,8 +3564,8 @@ export namespace Prisma {
     visible?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    connectTreeId?: boolean
+    connectTree?: boolean | ConnectTreeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["link"]>
 
   export type LinkSelectScalar = {
@@ -2341,24 +3577,24 @@ export namespace Prisma {
     visible?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    userId?: boolean
+    connectTreeId?: boolean
   }
 
-  export type LinkOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "url" | "thumbnail" | "clicks" | "visible" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["link"]>
+  export type LinkOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "url" | "thumbnail" | "clicks" | "visible" | "createdAt" | "updatedAt" | "connectTreeId", ExtArgs["result"]["link"]>
   export type LinkInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    connectTree?: boolean | ConnectTreeDefaultArgs<ExtArgs>
   }
   export type LinkIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    connectTree?: boolean | ConnectTreeDefaultArgs<ExtArgs>
   }
   export type LinkIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    connectTree?: boolean | ConnectTreeDefaultArgs<ExtArgs>
   }
 
   export type $LinkPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Link"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
+      connectTree: Prisma.$ConnectTreePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2369,7 +3605,7 @@ export namespace Prisma {
       visible: boolean
       createdAt: Date
       updatedAt: Date
-      userId: string
+      connectTreeId: string
     }, ExtArgs["result"]["link"]>
     composites: {}
   }
@@ -2764,7 +4000,7 @@ export namespace Prisma {
    */
   export interface Prisma__LinkClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    connectTree<T extends ConnectTreeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConnectTreeDefaultArgs<ExtArgs>>): Prisma__ConnectTreeClient<$Result.GetResult<Prisma.$ConnectTreePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2802,7 +4038,7 @@ export namespace Prisma {
     readonly visible: FieldRef<"Link", 'Boolean'>
     readonly createdAt: FieldRef<"Link", 'DateTime'>
     readonly updatedAt: FieldRef<"Link", 'DateTime'>
-    readonly userId: FieldRef<"Link", 'String'>
+    readonly connectTreeId: FieldRef<"Link", 'String'>
   }
     
 
@@ -3234,13 +4470,26 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     email: 'email',
-    username: 'username',
     imageUrl: 'imageUrl',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const ConnectTreeScalarFieldEnum: {
+    id: 'id',
+    username: 'username',
+    userId: 'userId',
+    title: 'title',
+    bio: 'bio',
+    avatar: 'avatar',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ConnectTreeScalarFieldEnum = (typeof ConnectTreeScalarFieldEnum)[keyof typeof ConnectTreeScalarFieldEnum]
 
 
   export const LinkScalarFieldEnum: {
@@ -3252,7 +4501,7 @@ export namespace Prisma {
     visible: 'visible',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    userId: 'userId'
+    connectTreeId: 'connectTreeId'
   };
 
   export type LinkScalarFieldEnum = (typeof LinkScalarFieldEnum)[keyof typeof LinkScalarFieldEnum]
@@ -3359,40 +4608,36 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
-    username?: StringFilter<"User"> | string
     imageUrl?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    links?: LinkListRelationFilter
+    connectTrees?: ConnectTreeListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
-    username?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    links?: LinkOrderByRelationAggregateInput
+    connectTrees?: ConnectTreeOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
-    username?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     imageUrl?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    links?: LinkListRelationFilter
-  }, "id" | "email" | "username">
+    connectTrees?: ConnectTreeListRelationFilter
+  }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
-    username?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3407,10 +4652,82 @@ export namespace Prisma {
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
-    username?: StringWithAggregatesFilter<"User"> | string
     imageUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type ConnectTreeWhereInput = {
+    AND?: ConnectTreeWhereInput | ConnectTreeWhereInput[]
+    OR?: ConnectTreeWhereInput[]
+    NOT?: ConnectTreeWhereInput | ConnectTreeWhereInput[]
+    id?: StringFilter<"ConnectTree"> | string
+    username?: StringFilter<"ConnectTree"> | string
+    userId?: StringFilter<"ConnectTree"> | string
+    title?: StringNullableFilter<"ConnectTree"> | string | null
+    bio?: StringNullableFilter<"ConnectTree"> | string | null
+    avatar?: StringNullableFilter<"ConnectTree"> | string | null
+    createdAt?: DateTimeFilter<"ConnectTree"> | Date | string
+    updatedAt?: DateTimeFilter<"ConnectTree"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    links?: LinkListRelationFilter
+  }
+
+  export type ConnectTreeOrderByWithRelationInput = {
+    id?: SortOrder
+    username?: SortOrder
+    userId?: SortOrder
+    title?: SortOrderInput | SortOrder
+    bio?: SortOrderInput | SortOrder
+    avatar?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    links?: LinkOrderByRelationAggregateInput
+  }
+
+  export type ConnectTreeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    username?: string
+    AND?: ConnectTreeWhereInput | ConnectTreeWhereInput[]
+    OR?: ConnectTreeWhereInput[]
+    NOT?: ConnectTreeWhereInput | ConnectTreeWhereInput[]
+    userId?: StringFilter<"ConnectTree"> | string
+    title?: StringNullableFilter<"ConnectTree"> | string | null
+    bio?: StringNullableFilter<"ConnectTree"> | string | null
+    avatar?: StringNullableFilter<"ConnectTree"> | string | null
+    createdAt?: DateTimeFilter<"ConnectTree"> | Date | string
+    updatedAt?: DateTimeFilter<"ConnectTree"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    links?: LinkListRelationFilter
+  }, "id" | "username">
+
+  export type ConnectTreeOrderByWithAggregationInput = {
+    id?: SortOrder
+    username?: SortOrder
+    userId?: SortOrder
+    title?: SortOrderInput | SortOrder
+    bio?: SortOrderInput | SortOrder
+    avatar?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ConnectTreeCountOrderByAggregateInput
+    _max?: ConnectTreeMaxOrderByAggregateInput
+    _min?: ConnectTreeMinOrderByAggregateInput
+  }
+
+  export type ConnectTreeScalarWhereWithAggregatesInput = {
+    AND?: ConnectTreeScalarWhereWithAggregatesInput | ConnectTreeScalarWhereWithAggregatesInput[]
+    OR?: ConnectTreeScalarWhereWithAggregatesInput[]
+    NOT?: ConnectTreeScalarWhereWithAggregatesInput | ConnectTreeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ConnectTree"> | string
+    username?: StringWithAggregatesFilter<"ConnectTree"> | string
+    userId?: StringWithAggregatesFilter<"ConnectTree"> | string
+    title?: StringNullableWithAggregatesFilter<"ConnectTree"> | string | null
+    bio?: StringNullableWithAggregatesFilter<"ConnectTree"> | string | null
+    avatar?: StringNullableWithAggregatesFilter<"ConnectTree"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ConnectTree"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ConnectTree"> | Date | string
   }
 
   export type LinkWhereInput = {
@@ -3425,8 +4742,8 @@ export namespace Prisma {
     visible?: BoolFilter<"Link"> | boolean
     createdAt?: DateTimeFilter<"Link"> | Date | string
     updatedAt?: DateTimeFilter<"Link"> | Date | string
-    userId?: StringFilter<"Link"> | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    connectTreeId?: StringFilter<"Link"> | string
+    connectTree?: XOR<ConnectTreeScalarRelationFilter, ConnectTreeWhereInput>
   }
 
   export type LinkOrderByWithRelationInput = {
@@ -3438,8 +4755,8 @@ export namespace Prisma {
     visible?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
-    user?: UserOrderByWithRelationInput
+    connectTreeId?: SortOrder
+    connectTree?: ConnectTreeOrderByWithRelationInput
   }
 
   export type LinkWhereUniqueInput = Prisma.AtLeast<{
@@ -3454,8 +4771,8 @@ export namespace Prisma {
     visible?: BoolFilter<"Link"> | boolean
     createdAt?: DateTimeFilter<"Link"> | Date | string
     updatedAt?: DateTimeFilter<"Link"> | Date | string
-    userId?: StringFilter<"Link"> | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    connectTreeId?: StringFilter<"Link"> | string
+    connectTree?: XOR<ConnectTreeScalarRelationFilter, ConnectTreeWhereInput>
   }, "id">
 
   export type LinkOrderByWithAggregationInput = {
@@ -3467,7 +4784,7 @@ export namespace Prisma {
     visible?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
+    connectTreeId?: SortOrder
     _count?: LinkCountOrderByAggregateInput
     _avg?: LinkAvgOrderByAggregateInput
     _max?: LinkMaxOrderByAggregateInput
@@ -3487,53 +4804,48 @@ export namespace Prisma {
     visible?: BoolWithAggregatesFilter<"Link"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Link"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Link"> | Date | string
-    userId?: StringWithAggregatesFilter<"Link"> | string
+    connectTreeId?: StringWithAggregatesFilter<"Link"> | string
   }
 
   export type UserCreateInput = {
     id: string
     email: string
-    username: string
     imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    links?: LinkCreateNestedManyWithoutUserInput
+    connectTrees?: ConnectTreeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id: string
     email: string
-    username: string
     imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    links?: LinkUncheckedCreateNestedManyWithoutUserInput
+    connectTrees?: ConnectTreeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    links?: LinkUpdateManyWithoutUserNestedInput
+    connectTrees?: ConnectTreeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    links?: LinkUncheckedUpdateManyWithoutUserNestedInput
+    connectTrees?: ConnectTreeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id: string
     email: string
-    username: string
     imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3542,7 +4854,6 @@ export namespace Prisma {
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3551,8 +4862,87 @@ export namespace Prisma {
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConnectTreeCreateInput = {
+    id?: string
+    username: string
+    title?: string | null
+    bio?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutConnectTreesInput
+    links?: LinkCreateNestedManyWithoutConnectTreeInput
+  }
+
+  export type ConnectTreeUncheckedCreateInput = {
+    id?: string
+    username: string
+    userId: string
+    title?: string | null
+    bio?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    links?: LinkUncheckedCreateNestedManyWithoutConnectTreeInput
+  }
+
+  export type ConnectTreeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutConnectTreesNestedInput
+    links?: LinkUpdateManyWithoutConnectTreeNestedInput
+  }
+
+  export type ConnectTreeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    links?: LinkUncheckedUpdateManyWithoutConnectTreeNestedInput
+  }
+
+  export type ConnectTreeCreateManyInput = {
+    id?: string
+    username: string
+    userId: string
+    title?: string | null
+    bio?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ConnectTreeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConnectTreeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3566,7 +4956,7 @@ export namespace Prisma {
     visible?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutLinksInput
+    connectTree: ConnectTreeCreateNestedOneWithoutLinksInput
   }
 
   export type LinkUncheckedCreateInput = {
@@ -3578,7 +4968,7 @@ export namespace Prisma {
     visible?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    userId: string
+    connectTreeId: string
   }
 
   export type LinkUpdateInput = {
@@ -3590,7 +4980,7 @@ export namespace Prisma {
     visible?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutLinksNestedInput
+    connectTree?: ConnectTreeUpdateOneRequiredWithoutLinksNestedInput
   }
 
   export type LinkUncheckedUpdateInput = {
@@ -3602,7 +4992,7 @@ export namespace Prisma {
     visible?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
+    connectTreeId?: StringFieldUpdateOperationsInput | string
   }
 
   export type LinkCreateManyInput = {
@@ -3614,7 +5004,7 @@ export namespace Prisma {
     visible?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    userId: string
+    connectTreeId: string
   }
 
   export type LinkUpdateManyMutationInput = {
@@ -3637,7 +5027,7 @@ export namespace Prisma {
     visible?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
+    connectTreeId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -3681,10 +5071,10 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type LinkListRelationFilter = {
-    every?: LinkWhereInput
-    some?: LinkWhereInput
-    none?: LinkWhereInput
+  export type ConnectTreeListRelationFilter = {
+    every?: ConnectTreeWhereInput
+    some?: ConnectTreeWhereInput
+    none?: ConnectTreeWhereInput
   }
 
   export type SortOrderInput = {
@@ -3692,14 +5082,13 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type LinkOrderByRelationAggregateInput = {
+  export type ConnectTreeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    username?: SortOrder
     imageUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3708,7 +5097,6 @@ export namespace Prisma {
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    username?: SortOrder
     imageUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3717,7 +5105,6 @@ export namespace Prisma {
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    username?: SortOrder
     imageUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3773,6 +5160,54 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type LinkListRelationFilter = {
+    every?: LinkWhereInput
+    some?: LinkWhereInput
+    none?: LinkWhereInput
+  }
+
+  export type LinkOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ConnectTreeCountOrderByAggregateInput = {
+    id?: SortOrder
+    username?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    bio?: SortOrder
+    avatar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConnectTreeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    username?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    bio?: SortOrder
+    avatar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConnectTreeMinOrderByAggregateInput = {
+    id?: SortOrder
+    username?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    bio?: SortOrder
+    avatar?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -3789,9 +5224,9 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+  export type ConnectTreeScalarRelationFilter = {
+    is?: ConnectTreeWhereInput
+    isNot?: ConnectTreeWhereInput
   }
 
   export type LinkCountOrderByAggregateInput = {
@@ -3803,7 +5238,7 @@ export namespace Prisma {
     visible?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
+    connectTreeId?: SortOrder
   }
 
   export type LinkAvgOrderByAggregateInput = {
@@ -3819,7 +5254,7 @@ export namespace Prisma {
     visible?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
+    connectTreeId?: SortOrder
   }
 
   export type LinkMinOrderByAggregateInput = {
@@ -3831,7 +5266,7 @@ export namespace Prisma {
     visible?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
+    connectTreeId?: SortOrder
   }
 
   export type LinkSumOrderByAggregateInput = {
@@ -3862,18 +5297,18 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type LinkCreateNestedManyWithoutUserInput = {
-    create?: XOR<LinkCreateWithoutUserInput, LinkUncheckedCreateWithoutUserInput> | LinkCreateWithoutUserInput[] | LinkUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: LinkCreateOrConnectWithoutUserInput | LinkCreateOrConnectWithoutUserInput[]
-    createMany?: LinkCreateManyUserInputEnvelope
-    connect?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
+  export type ConnectTreeCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConnectTreeCreateWithoutUserInput, ConnectTreeUncheckedCreateWithoutUserInput> | ConnectTreeCreateWithoutUserInput[] | ConnectTreeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConnectTreeCreateOrConnectWithoutUserInput | ConnectTreeCreateOrConnectWithoutUserInput[]
+    createMany?: ConnectTreeCreateManyUserInputEnvelope
+    connect?: ConnectTreeWhereUniqueInput | ConnectTreeWhereUniqueInput[]
   }
 
-  export type LinkUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<LinkCreateWithoutUserInput, LinkUncheckedCreateWithoutUserInput> | LinkCreateWithoutUserInput[] | LinkUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: LinkCreateOrConnectWithoutUserInput | LinkCreateOrConnectWithoutUserInput[]
-    createMany?: LinkCreateManyUserInputEnvelope
-    connect?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
+  export type ConnectTreeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConnectTreeCreateWithoutUserInput, ConnectTreeUncheckedCreateWithoutUserInput> | ConnectTreeCreateWithoutUserInput[] | ConnectTreeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConnectTreeCreateOrConnectWithoutUserInput | ConnectTreeCreateOrConnectWithoutUserInput[]
+    createMany?: ConnectTreeCreateManyUserInputEnvelope
+    connect?: ConnectTreeWhereUniqueInput | ConnectTreeWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -3888,38 +5323,94 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type LinkUpdateManyWithoutUserNestedInput = {
-    create?: XOR<LinkCreateWithoutUserInput, LinkUncheckedCreateWithoutUserInput> | LinkCreateWithoutUserInput[] | LinkUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: LinkCreateOrConnectWithoutUserInput | LinkCreateOrConnectWithoutUserInput[]
-    upsert?: LinkUpsertWithWhereUniqueWithoutUserInput | LinkUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: LinkCreateManyUserInputEnvelope
-    set?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
-    disconnect?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
-    delete?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
-    connect?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
-    update?: LinkUpdateWithWhereUniqueWithoutUserInput | LinkUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: LinkUpdateManyWithWhereWithoutUserInput | LinkUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: LinkScalarWhereInput | LinkScalarWhereInput[]
+  export type ConnectTreeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConnectTreeCreateWithoutUserInput, ConnectTreeUncheckedCreateWithoutUserInput> | ConnectTreeCreateWithoutUserInput[] | ConnectTreeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConnectTreeCreateOrConnectWithoutUserInput | ConnectTreeCreateOrConnectWithoutUserInput[]
+    upsert?: ConnectTreeUpsertWithWhereUniqueWithoutUserInput | ConnectTreeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConnectTreeCreateManyUserInputEnvelope
+    set?: ConnectTreeWhereUniqueInput | ConnectTreeWhereUniqueInput[]
+    disconnect?: ConnectTreeWhereUniqueInput | ConnectTreeWhereUniqueInput[]
+    delete?: ConnectTreeWhereUniqueInput | ConnectTreeWhereUniqueInput[]
+    connect?: ConnectTreeWhereUniqueInput | ConnectTreeWhereUniqueInput[]
+    update?: ConnectTreeUpdateWithWhereUniqueWithoutUserInput | ConnectTreeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConnectTreeUpdateManyWithWhereWithoutUserInput | ConnectTreeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConnectTreeScalarWhereInput | ConnectTreeScalarWhereInput[]
   }
 
-  export type LinkUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<LinkCreateWithoutUserInput, LinkUncheckedCreateWithoutUserInput> | LinkCreateWithoutUserInput[] | LinkUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: LinkCreateOrConnectWithoutUserInput | LinkCreateOrConnectWithoutUserInput[]
-    upsert?: LinkUpsertWithWhereUniqueWithoutUserInput | LinkUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: LinkCreateManyUserInputEnvelope
-    set?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
-    disconnect?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
-    delete?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
-    connect?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
-    update?: LinkUpdateWithWhereUniqueWithoutUserInput | LinkUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: LinkUpdateManyWithWhereWithoutUserInput | LinkUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: LinkScalarWhereInput | LinkScalarWhereInput[]
+  export type ConnectTreeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConnectTreeCreateWithoutUserInput, ConnectTreeUncheckedCreateWithoutUserInput> | ConnectTreeCreateWithoutUserInput[] | ConnectTreeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConnectTreeCreateOrConnectWithoutUserInput | ConnectTreeCreateOrConnectWithoutUserInput[]
+    upsert?: ConnectTreeUpsertWithWhereUniqueWithoutUserInput | ConnectTreeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConnectTreeCreateManyUserInputEnvelope
+    set?: ConnectTreeWhereUniqueInput | ConnectTreeWhereUniqueInput[]
+    disconnect?: ConnectTreeWhereUniqueInput | ConnectTreeWhereUniqueInput[]
+    delete?: ConnectTreeWhereUniqueInput | ConnectTreeWhereUniqueInput[]
+    connect?: ConnectTreeWhereUniqueInput | ConnectTreeWhereUniqueInput[]
+    update?: ConnectTreeUpdateWithWhereUniqueWithoutUserInput | ConnectTreeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConnectTreeUpdateManyWithWhereWithoutUserInput | ConnectTreeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConnectTreeScalarWhereInput | ConnectTreeScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutLinksInput = {
-    create?: XOR<UserCreateWithoutLinksInput, UserUncheckedCreateWithoutLinksInput>
-    connectOrCreate?: UserCreateOrConnectWithoutLinksInput
+  export type UserCreateNestedOneWithoutConnectTreesInput = {
+    create?: XOR<UserCreateWithoutConnectTreesInput, UserUncheckedCreateWithoutConnectTreesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConnectTreesInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type LinkCreateNestedManyWithoutConnectTreeInput = {
+    create?: XOR<LinkCreateWithoutConnectTreeInput, LinkUncheckedCreateWithoutConnectTreeInput> | LinkCreateWithoutConnectTreeInput[] | LinkUncheckedCreateWithoutConnectTreeInput[]
+    connectOrCreate?: LinkCreateOrConnectWithoutConnectTreeInput | LinkCreateOrConnectWithoutConnectTreeInput[]
+    createMany?: LinkCreateManyConnectTreeInputEnvelope
+    connect?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
+  }
+
+  export type LinkUncheckedCreateNestedManyWithoutConnectTreeInput = {
+    create?: XOR<LinkCreateWithoutConnectTreeInput, LinkUncheckedCreateWithoutConnectTreeInput> | LinkCreateWithoutConnectTreeInput[] | LinkUncheckedCreateWithoutConnectTreeInput[]
+    connectOrCreate?: LinkCreateOrConnectWithoutConnectTreeInput | LinkCreateOrConnectWithoutConnectTreeInput[]
+    createMany?: LinkCreateManyConnectTreeInputEnvelope
+    connect?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutConnectTreesNestedInput = {
+    create?: XOR<UserCreateWithoutConnectTreesInput, UserUncheckedCreateWithoutConnectTreesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConnectTreesInput
+    upsert?: UserUpsertWithoutConnectTreesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutConnectTreesInput, UserUpdateWithoutConnectTreesInput>, UserUncheckedUpdateWithoutConnectTreesInput>
+  }
+
+  export type LinkUpdateManyWithoutConnectTreeNestedInput = {
+    create?: XOR<LinkCreateWithoutConnectTreeInput, LinkUncheckedCreateWithoutConnectTreeInput> | LinkCreateWithoutConnectTreeInput[] | LinkUncheckedCreateWithoutConnectTreeInput[]
+    connectOrCreate?: LinkCreateOrConnectWithoutConnectTreeInput | LinkCreateOrConnectWithoutConnectTreeInput[]
+    upsert?: LinkUpsertWithWhereUniqueWithoutConnectTreeInput | LinkUpsertWithWhereUniqueWithoutConnectTreeInput[]
+    createMany?: LinkCreateManyConnectTreeInputEnvelope
+    set?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
+    disconnect?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
+    delete?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
+    connect?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
+    update?: LinkUpdateWithWhereUniqueWithoutConnectTreeInput | LinkUpdateWithWhereUniqueWithoutConnectTreeInput[]
+    updateMany?: LinkUpdateManyWithWhereWithoutConnectTreeInput | LinkUpdateManyWithWhereWithoutConnectTreeInput[]
+    deleteMany?: LinkScalarWhereInput | LinkScalarWhereInput[]
+  }
+
+  export type LinkUncheckedUpdateManyWithoutConnectTreeNestedInput = {
+    create?: XOR<LinkCreateWithoutConnectTreeInput, LinkUncheckedCreateWithoutConnectTreeInput> | LinkCreateWithoutConnectTreeInput[] | LinkUncheckedCreateWithoutConnectTreeInput[]
+    connectOrCreate?: LinkCreateOrConnectWithoutConnectTreeInput | LinkCreateOrConnectWithoutConnectTreeInput[]
+    upsert?: LinkUpsertWithWhereUniqueWithoutConnectTreeInput | LinkUpsertWithWhereUniqueWithoutConnectTreeInput[]
+    createMany?: LinkCreateManyConnectTreeInputEnvelope
+    set?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
+    disconnect?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
+    delete?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
+    connect?: LinkWhereUniqueInput | LinkWhereUniqueInput[]
+    update?: LinkUpdateWithWhereUniqueWithoutConnectTreeInput | LinkUpdateWithWhereUniqueWithoutConnectTreeInput[]
+    updateMany?: LinkUpdateManyWithWhereWithoutConnectTreeInput | LinkUpdateManyWithWhereWithoutConnectTreeInput[]
+    deleteMany?: LinkScalarWhereInput | LinkScalarWhereInput[]
+  }
+
+  export type ConnectTreeCreateNestedOneWithoutLinksInput = {
+    create?: XOR<ConnectTreeCreateWithoutLinksInput, ConnectTreeUncheckedCreateWithoutLinksInput>
+    connectOrCreate?: ConnectTreeCreateOrConnectWithoutLinksInput
+    connect?: ConnectTreeWhereUniqueInput
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -3934,12 +5425,12 @@ export namespace Prisma {
     set?: boolean
   }
 
-  export type UserUpdateOneRequiredWithoutLinksNestedInput = {
-    create?: XOR<UserCreateWithoutLinksInput, UserUncheckedCreateWithoutLinksInput>
-    connectOrCreate?: UserCreateOrConnectWithoutLinksInput
-    upsert?: UserUpsertWithoutLinksInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLinksInput, UserUpdateWithoutLinksInput>, UserUncheckedUpdateWithoutLinksInput>
+  export type ConnectTreeUpdateOneRequiredWithoutLinksNestedInput = {
+    create?: XOR<ConnectTreeCreateWithoutLinksInput, ConnectTreeUncheckedCreateWithoutLinksInput>
+    connectOrCreate?: ConnectTreeCreateOrConnectWithoutLinksInput
+    upsert?: ConnectTreeUpsertWithoutLinksInput
+    connect?: ConnectTreeWhereUniqueInput
+    update?: XOR<XOR<ConnectTreeUpdateToOneWithWhereWithoutLinksInput, ConnectTreeUpdateWithoutLinksInput>, ConnectTreeUncheckedUpdateWithoutLinksInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -4091,52 +5582,162 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type LinkCreateWithoutUserInput = {
+  export type ConnectTreeCreateWithoutUserInput = {
     id?: string
-    title: string
-    url: string
-    thumbnail?: string | null
-    clicks?: number
-    visible?: boolean
+    username: string
+    title?: string | null
+    bio?: string | null
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    links?: LinkCreateNestedManyWithoutConnectTreeInput
   }
 
-  export type LinkUncheckedCreateWithoutUserInput = {
+  export type ConnectTreeUncheckedCreateWithoutUserInput = {
     id?: string
-    title: string
-    url: string
-    thumbnail?: string | null
-    clicks?: number
-    visible?: boolean
+    username: string
+    title?: string | null
+    bio?: string | null
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    links?: LinkUncheckedCreateNestedManyWithoutConnectTreeInput
   }
 
-  export type LinkCreateOrConnectWithoutUserInput = {
-    where: LinkWhereUniqueInput
-    create: XOR<LinkCreateWithoutUserInput, LinkUncheckedCreateWithoutUserInput>
+  export type ConnectTreeCreateOrConnectWithoutUserInput = {
+    where: ConnectTreeWhereUniqueInput
+    create: XOR<ConnectTreeCreateWithoutUserInput, ConnectTreeUncheckedCreateWithoutUserInput>
   }
 
-  export type LinkCreateManyUserInputEnvelope = {
-    data: LinkCreateManyUserInput | LinkCreateManyUserInput[]
+  export type ConnectTreeCreateManyUserInputEnvelope = {
+    data: ConnectTreeCreateManyUserInput | ConnectTreeCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type LinkUpsertWithWhereUniqueWithoutUserInput = {
-    where: LinkWhereUniqueInput
-    update: XOR<LinkUpdateWithoutUserInput, LinkUncheckedUpdateWithoutUserInput>
-    create: XOR<LinkCreateWithoutUserInput, LinkUncheckedCreateWithoutUserInput>
+  export type ConnectTreeUpsertWithWhereUniqueWithoutUserInput = {
+    where: ConnectTreeWhereUniqueInput
+    update: XOR<ConnectTreeUpdateWithoutUserInput, ConnectTreeUncheckedUpdateWithoutUserInput>
+    create: XOR<ConnectTreeCreateWithoutUserInput, ConnectTreeUncheckedCreateWithoutUserInput>
   }
 
-  export type LinkUpdateWithWhereUniqueWithoutUserInput = {
-    where: LinkWhereUniqueInput
-    data: XOR<LinkUpdateWithoutUserInput, LinkUncheckedUpdateWithoutUserInput>
+  export type ConnectTreeUpdateWithWhereUniqueWithoutUserInput = {
+    where: ConnectTreeWhereUniqueInput
+    data: XOR<ConnectTreeUpdateWithoutUserInput, ConnectTreeUncheckedUpdateWithoutUserInput>
   }
 
-  export type LinkUpdateManyWithWhereWithoutUserInput = {
+  export type ConnectTreeUpdateManyWithWhereWithoutUserInput = {
+    where: ConnectTreeScalarWhereInput
+    data: XOR<ConnectTreeUpdateManyMutationInput, ConnectTreeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ConnectTreeScalarWhereInput = {
+    AND?: ConnectTreeScalarWhereInput | ConnectTreeScalarWhereInput[]
+    OR?: ConnectTreeScalarWhereInput[]
+    NOT?: ConnectTreeScalarWhereInput | ConnectTreeScalarWhereInput[]
+    id?: StringFilter<"ConnectTree"> | string
+    username?: StringFilter<"ConnectTree"> | string
+    userId?: StringFilter<"ConnectTree"> | string
+    title?: StringNullableFilter<"ConnectTree"> | string | null
+    bio?: StringNullableFilter<"ConnectTree"> | string | null
+    avatar?: StringNullableFilter<"ConnectTree"> | string | null
+    createdAt?: DateTimeFilter<"ConnectTree"> | Date | string
+    updatedAt?: DateTimeFilter<"ConnectTree"> | Date | string
+  }
+
+  export type UserCreateWithoutConnectTreesInput = {
+    id: string
+    email: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserUncheckedCreateWithoutConnectTreesInput = {
+    id: string
+    email: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserCreateOrConnectWithoutConnectTreesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutConnectTreesInput, UserUncheckedCreateWithoutConnectTreesInput>
+  }
+
+  export type LinkCreateWithoutConnectTreeInput = {
+    id?: string
+    title: string
+    url: string
+    thumbnail?: string | null
+    clicks?: number
+    visible?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LinkUncheckedCreateWithoutConnectTreeInput = {
+    id?: string
+    title: string
+    url: string
+    thumbnail?: string | null
+    clicks?: number
+    visible?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LinkCreateOrConnectWithoutConnectTreeInput = {
+    where: LinkWhereUniqueInput
+    create: XOR<LinkCreateWithoutConnectTreeInput, LinkUncheckedCreateWithoutConnectTreeInput>
+  }
+
+  export type LinkCreateManyConnectTreeInputEnvelope = {
+    data: LinkCreateManyConnectTreeInput | LinkCreateManyConnectTreeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutConnectTreesInput = {
+    update: XOR<UserUpdateWithoutConnectTreesInput, UserUncheckedUpdateWithoutConnectTreesInput>
+    create: XOR<UserCreateWithoutConnectTreesInput, UserUncheckedCreateWithoutConnectTreesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutConnectTreesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutConnectTreesInput, UserUncheckedUpdateWithoutConnectTreesInput>
+  }
+
+  export type UserUpdateWithoutConnectTreesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateWithoutConnectTreesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LinkUpsertWithWhereUniqueWithoutConnectTreeInput = {
+    where: LinkWhereUniqueInput
+    update: XOR<LinkUpdateWithoutConnectTreeInput, LinkUncheckedUpdateWithoutConnectTreeInput>
+    create: XOR<LinkCreateWithoutConnectTreeInput, LinkUncheckedCreateWithoutConnectTreeInput>
+  }
+
+  export type LinkUpdateWithWhereUniqueWithoutConnectTreeInput = {
+    where: LinkWhereUniqueInput
+    data: XOR<LinkUpdateWithoutConnectTreeInput, LinkUncheckedUpdateWithoutConnectTreeInput>
+  }
+
+  export type LinkUpdateManyWithWhereWithoutConnectTreeInput = {
     where: LinkScalarWhereInput
-    data: XOR<LinkUpdateManyMutationInput, LinkUncheckedUpdateManyWithoutUserInput>
+    data: XOR<LinkUpdateManyMutationInput, LinkUncheckedUpdateManyWithoutConnectTreeInput>
   }
 
   export type LinkScalarWhereInput = {
@@ -4151,62 +5752,112 @@ export namespace Prisma {
     visible?: BoolFilter<"Link"> | boolean
     createdAt?: DateTimeFilter<"Link"> | Date | string
     updatedAt?: DateTimeFilter<"Link"> | Date | string
-    userId?: StringFilter<"Link"> | string
+    connectTreeId?: StringFilter<"Link"> | string
   }
 
-  export type UserCreateWithoutLinksInput = {
-    id: string
-    email: string
+  export type ConnectTreeCreateWithoutLinksInput = {
+    id?: string
     username: string
-    imageUrl?: string | null
+    title?: string | null
+    bio?: string | null
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutConnectTreesInput
+  }
+
+  export type ConnectTreeUncheckedCreateWithoutLinksInput = {
+    id?: string
+    username: string
+    userId: string
+    title?: string | null
+    bio?: string | null
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type UserUncheckedCreateWithoutLinksInput = {
-    id: string
-    email: string
+  export type ConnectTreeCreateOrConnectWithoutLinksInput = {
+    where: ConnectTreeWhereUniqueInput
+    create: XOR<ConnectTreeCreateWithoutLinksInput, ConnectTreeUncheckedCreateWithoutLinksInput>
+  }
+
+  export type ConnectTreeUpsertWithoutLinksInput = {
+    update: XOR<ConnectTreeUpdateWithoutLinksInput, ConnectTreeUncheckedUpdateWithoutLinksInput>
+    create: XOR<ConnectTreeCreateWithoutLinksInput, ConnectTreeUncheckedCreateWithoutLinksInput>
+    where?: ConnectTreeWhereInput
+  }
+
+  export type ConnectTreeUpdateToOneWithWhereWithoutLinksInput = {
+    where?: ConnectTreeWhereInput
+    data: XOR<ConnectTreeUpdateWithoutLinksInput, ConnectTreeUncheckedUpdateWithoutLinksInput>
+  }
+
+  export type ConnectTreeUpdateWithoutLinksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutConnectTreesNestedInput
+  }
+
+  export type ConnectTreeUncheckedUpdateWithoutLinksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConnectTreeCreateManyUserInput = {
+    id?: string
     username: string
-    imageUrl?: string | null
+    title?: string | null
+    bio?: string | null
+    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type UserCreateOrConnectWithoutLinksInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutLinksInput, UserUncheckedCreateWithoutLinksInput>
-  }
-
-  export type UserUpsertWithoutLinksInput = {
-    update: XOR<UserUpdateWithoutLinksInput, UserUncheckedUpdateWithoutLinksInput>
-    create: XOR<UserCreateWithoutLinksInput, UserUncheckedCreateWithoutLinksInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutLinksInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutLinksInput, UserUncheckedUpdateWithoutLinksInput>
-  }
-
-  export type UserUpdateWithoutLinksInput = {
+  export type ConnectTreeUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    links?: LinkUpdateManyWithoutConnectTreeNestedInput
+  }
+
+  export type ConnectTreeUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    links?: LinkUncheckedUpdateManyWithoutConnectTreeNestedInput
+  }
+
+  export type ConnectTreeUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserUncheckedUpdateWithoutLinksInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LinkCreateManyUserInput = {
+  export type LinkCreateManyConnectTreeInput = {
     id?: string
     title: string
     url: string
@@ -4217,7 +5868,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type LinkUpdateWithoutUserInput = {
+  export type LinkUpdateWithoutConnectTreeInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
@@ -4228,7 +5879,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type LinkUncheckedUpdateWithoutUserInput = {
+  export type LinkUncheckedUpdateWithoutConnectTreeInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
@@ -4239,7 +5890,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type LinkUncheckedUpdateManyWithoutUserInput = {
+  export type LinkUncheckedUpdateManyWithoutConnectTreeInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
