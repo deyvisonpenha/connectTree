@@ -69,7 +69,7 @@ export default function Onboarding() {
         .catch((error: string) => {
           toast.error(error);
         })
-        .finally(() => {
+        .then(() => {
           router.push("/dashboard");
         });
     });
