@@ -1,19 +1,18 @@
 "use server";
-import { currentUser, clerkClient } from "@clerk/nextjs/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 
 export const updateOnboardingStatus = async () => {
-  const clerkUser = await currentUser();
-  const userId = clerkUser?.id as string;
-  
+  const { userId } = await auth();
+
   try {
     const client = await clerkClient();
-    const res = await client.users.updateUser(userId, {
+    const res = await client.users.updateUser(userId as string, {
       publicMetadata: {
         onboardingComplete: true,
       },
     });
 
-    return res.publicMetadata;
+    return {onboardingComplete: res.publicMetadata?.onboardingComplete}
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.log(error.message);

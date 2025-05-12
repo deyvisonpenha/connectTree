@@ -45,7 +45,7 @@ export default function Onboarding() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
       const username = values.username;
 
@@ -60,18 +60,20 @@ export default function Onboarding() {
         return;
       }
 
-      createAccount()
-        .then(({ user }) => {
-          createConnectTree(username, user.id).then(() =>
-            updateOnboardingStatus()
-          );
-        })
-        .catch((error: string) => {
-          toast.error(error);
-        })
-        .then(() => {
-          router.push("/dashboard");
-        });
+      try {
+        const { user } = await createAccount();
+        await createConnectTree(username, user.id);
+        const { onboardingComplete } = await updateOnboardingStatus();
+
+        if(onboardingComplete){
+            toast.success("Account created successfully!");
+            router.push("/dashboard")
+        }
+        
+      } catch (error) {
+        toast.error(error as string);
+        return;
+      }
     });
   }
 

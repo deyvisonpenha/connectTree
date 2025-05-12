@@ -10,7 +10,7 @@ export default function PreviewButton(){
     const { connectTree } = useContext(ConnectTreeContext);
 
     return (<Button asChild variant={'outline'}>
-    <Link href={`/${connectTree.username}`}>
+    <Link href={`/${connectTree?.username}`}>
       <EyeIcon /> Preview
     </Link>
   </Button>)

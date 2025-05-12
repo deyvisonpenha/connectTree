@@ -1,7 +1,13 @@
 import Image from "next/image";
 import Onboarding from "@/components/onboarding";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-export default function Page() {
+export default async function Page() {
+  const { sessionClaims } = await auth();
+
+  if(sessionClaims?.metadata?.onboardingComplete) redirect('/dashboard')
+
   return (
     <div className="flex flex-1 w-full h-dvh">
       <section className="w-2/3 ml-24">

@@ -10,7 +10,7 @@ export default async function Page() {
   return (
     <div className="m-4 w-full">
       <div className="flex w-full justify-between">
-        <h1>My Linktree</h1>
+        <h1>My ConnectTree</h1>
         <div className="flex gap-4">
           <LinkSheetForm>
             <Button>
